@@ -1,51 +1,131 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Módulo 7 – Lenguaje Corporal</title>
+
 <style>
-*{box-sizing:border-box}
-html,body{margin:0;padding:0;background:#f4f4f4;font-family:Arial,sans-serif;color:#444}
-body{min-height:100vh}
-.wrap{width:100%;max-width:1200px;margin:0 auto;padding:18px 2vw 28px}
-h1{text-align:center;font-size:clamp(20px,3vw,32px);margin:0 0 16px;font-weight:600}
-.viewer{width:100%;background:#fff;padding:10px;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,.12)}
-.slide{display:block;width:100%;height:auto;max-width:100%;border-radius:5px}
-.controls{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:14px;flex-wrap:wrap}
-button{padding:9px 18px;border:1px solid #aaa;border-radius:6px;background:#fff;cursor:pointer;font-size:15px}
-button:hover:not(:disabled){background:#f0f0f0}
-button:disabled{opacity:.45;cursor:not-allowed}
-#counter{min-width:115px;text-align:center;font-size:15px}
-.notice{text-align:center;margin-top:12px;font-size:12px;color:#777}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.contenedor {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+#diapositiva {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+
+.controles {
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#contador {
+    font-size: 16px;
+    margin: 0 15px;
+}
+
 </style>
 </head>
+
 <body>
-<div class="wrap">
+
 <h1>Módulo 7 – Lenguaje Corporal</h1>
-<div class="viewer">
-<img id="slide" class="slide" src="diapositiva_1.jpg" alt="Diapositiva 1">
-<div class="controls">
-<button id="prev" type="button" onclick="change(-1)">◀ Anterior</button>
-<span id="counter">Diapositiva 1 de 3</span>
-<button id="next" type="button" onclick="change(1)">Siguiente ▶</button>
+
+<div class="contenedor">
+
+<img id="diapositiva"
+src="diapositiva_1.jpg"
+alt="Diapositiva">
+
+<div class="controles">
+
+<button onclick="anterior()">◀ Anterior</button>
+
+<span id="contador">
+Diapositiva 1 de 3
+</span>
+
+<button onclick="siguiente()">Siguiente ▶</button>
+
 </div>
+
 </div>
-<div class="notice">© DPIP – Lilian Bustamante · Material exclusivo para alumnos inscritos.</div>
-</div>
+
 <script>
-const slides=["diapositiva_1.jpg","diapositiva_2.jpg","diapositiva_3.jpg"];
-let n=0;
-function update(){
-  document.getElementById("slide").src=slides[n];
-  document.getElementById("slide").alt="Diapositiva "+(n+1);
-  document.getElementById("counter").textContent="Diapositiva "+(n+1)+" de "+slides.length;
-  document.getElementById("prev").disabled=n===0;
-  document.getElementById("next").disabled=n===slides.length-1;
+
+let diapositivaActual = 1;
+
+const totalDiapositivas = 3;
+
+function mostrarDiapositiva() {
+
+document.getElementById("diapositiva").src =
+"diapositiva_" + diapositivaActual + ".jpg";
+
+document.getElementById("contador").innerHTML =
+"Diapositiva " + diapositivaActual +
+" de " + totalDiapositivas;
+
 }
-function change(d){n=Math.max(0,Math.min(slides.length-1,n+d));update();window.scrollTo({top:0,behavior:"smooth"});}
-document.addEventListener("keydown",e=>{if(e.key==="ArrowLeft")change(-1);if(e.key==="ArrowRight")change(1);});
-update();
+
+function siguiente() {
+
+if (diapositivaActual < totalDiapositivas) {
+
+diapositivaActual++;
+
+mostrarDiapositiva();
+
+}
+
+}
+
+function anterior() {
+
+if (diapositivaActual > 1) {
+
+diapositivaActual--;
+
+mostrarDiapositiva();
+
+}
+
+}
+
 </script>
+
 </body>
 </html>
